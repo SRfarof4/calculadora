@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <button style="display: none;" id="myButton">Click me</button>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+        button {
+            width: 100%;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="addNumber(7)">7</button>
+        <button onclick="addNumber(8)">8</button>
+        <button onclick="addNumber(9)">9</button>
+        <button onclick="performOperation('/')">/</button>
+        <button onclick="addNumber(4)">4</button>
+        <button onclick="addNumber(5)">5</button>
+        <button onclick="addNumber(6)">6</button>
+        <button onclick="performOperation('*')">*</button>
+        <button onclick="addNumber(1)">1</button>
+        <button onclick="addNumber(2)">2</button>
+        <button onclick="addNumber(3)">3</button>
+        <button onclick="performOperation('-')">-</button>
+        <button onclick="addNumber(0)">0</button>
+        <button onclick="performOperation('+')">+</button>
+        <button onclick="calculateResult()">=</button>
+    </div>
+    <script>
+        let operation = '';
+        let operand1 = 0;
+        let operand2 = null;
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+            operation = '';
+            operand1 = 0;
+            operand2 = null;
+        }
+
+        function addNumber(number) {
+            const display = document.getElementById('display');
+            if (display.value === '0' || display.value === '') {
+                display.value = number;
+            } else {
+                display.value += number;
+            }
+        }
+
+        function performOperation(op) {
+            if (operation !== '') {
+                calculateResult();
+            }
+            operation = op;
+            operand1 = parseFloat(document.getElementById('display').value);
+            document.getElementById('display').value = '';
+        }
+
+        function calculateResult() {
+            let result = 0;
+            const operand2 = parseFloat(document.getElementById('display').value);
+            switch (operation) {
+                case '+':
+                    result = operand1 + operand2;
+                    break;
+                case '-':
+                    result = operand1 - operand2;
+                    break;
+                case '*':
+                    result = operand1 * operand2;
+                    break;
+                case '/':
+                    result = operand1 / operand2;
+                    break;
+                default:
+                    break;
+            }
+            document.getElementById('display').value = result;
+            operation = '';
+        }
+    </script>
+</body>
+</html>
+
+
+<button style="display: none;" id="myButton">Click me</button>
